@@ -23,7 +23,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
         let ty = &f.ty;
         let vis = &f.vis;
         quote! {
-            #vis #ident: std::option::Option<#ty>
+            #vis #ident: std::option::Option<std::string::String>
         }
     });
 

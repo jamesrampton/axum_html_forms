@@ -18,7 +18,7 @@ fn main() {
 
     let unchecked = inner::SimpleFormUnchecked {
         name: Some(String::from("Jane")),
-        age: Some(42),
+        age: Some(String::from("42")),
     };
 
     let _ = original.name;
