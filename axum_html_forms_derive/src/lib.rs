@@ -1,7 +1,6 @@
 #[proc_macro_derive(HtmlForm)]
 pub fn derive(input: TokenStream) -> TokenStream {
     let ast = parse_macro_input!(input as DeriveInput);
-    // eprintln!("{:#?}", ast);
 
     let ident = &ast.ident;
     let struct_vis = ast.vis;
