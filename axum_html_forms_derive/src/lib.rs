@@ -4,7 +4,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
     // eprintln!("{:#?}", ast);
 
     let ident = &ast.ident;
-    let struct_visibility = ast.vis;
+    let struct_vis = ast.vis;
     let unchecked_ident_string = format!("{}Unchecked", ident);
     let unchecked_ident = syn::Ident::new(&unchecked_ident_string, ident.span());
 
@@ -29,7 +29,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
 
     let expanded = quote! {
         #[derive(Debug)]
-        #struct_visibility struct #unchecked_ident {
+        #struct_vis struct #unchecked_ident {
             #(#optionized_fields,)*
         }
 
