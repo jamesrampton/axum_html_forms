@@ -21,7 +21,10 @@ fn main() {
         age: Some(String::from("42")),
     };
 
+    let form = inner::SimpleFormHtmlForm::default();
+
     let _ = original.name;
     let _ = original.age;
     let _ = unchecked;
+    let _ = form;
 }
