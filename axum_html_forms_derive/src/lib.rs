@@ -4,6 +4,8 @@ pub fn derive(input: TokenStream) -> TokenStream {
 
     let ident = &ast.ident;
     let struct_vis = ast.vis;
+
+    // <struct>Unchecked
     let unchecked_ident_string = format!("{}Unchecked", ident);
     let unchecked_ident = syn::Ident::new(&unchecked_ident_string, ident.span());
 
@@ -25,10 +27,27 @@ pub fn derive(input: TokenStream) -> TokenStream {
         }
     });
 
+    // <struct>Fields
+    let fields_ident_string = format!("{}Fields", ident);
+    let fields_ident = syn::Ident::new(&fields_ident_string, ident.span());
+
+    let form_input_fields = fields.iter().map(|f| {
+        let ident = &f.ident;
+        let vis = &f.vis;
+        quote! {
+            #vis #ident: axum_html_forms::FormInput
+        }
+    });
+
     let expanded = quote! {
         #[derive(Debug)]
         #struct_vis struct #unchecked_ident {
             #(#all_option_strings,)*
+        }
+
+        #[derive(Debug)]
+        #struct_vis struct #fields_ident {
+            #(#form_input_fields,)*
         }
 
     };

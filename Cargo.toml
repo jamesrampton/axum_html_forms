@@ -1,9 +1,14 @@
+[package]
+name = "axum-html-forms"
+version = "0.1.0"
+edition = "2021"
+
 [workspace]
 
-resolver = "2"
+[[bin]]
+name = "forms"
+path = "main.rs"
 
-members = [
-  "axum_html_forms",
-  "axum_html_forms_derive",
-]
-
+[dependencies]
+axum_html_forms = { path = "axum_html_forms"}
+axum_html_forms_derive = { path = "axum_html_forms_derive"}
