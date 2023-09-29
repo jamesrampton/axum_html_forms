@@ -10,8 +10,8 @@ mod inner {
 
 fn main() {
     let unchecked = inner::SimpleFormUnchecked {
-        name: Some(String::from("Jane")),
-        age: Some(42),
+        foo: Some(String::from("Jane")),
+        bar: Some(42),
     };
 
     // let _ = original.name;
