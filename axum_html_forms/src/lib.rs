@@ -2,6 +2,7 @@
 pub enum FormInputType {
     Email,
     Password,
+    Text,
 }
 
 impl std::fmt::Display for FormInputType {
@@ -9,6 +10,7 @@ impl std::fmt::Display for FormInputType {
         match self {
             FormInputType::Email => write!(f, "email"),
             FormInputType::Password => write!(f, "password"),
+            FormInputType::Text => write!(f, "text"),
         }
     }
 }
