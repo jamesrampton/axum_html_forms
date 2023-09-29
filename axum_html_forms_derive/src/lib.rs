@@ -1,17 +1,36 @@
 #[proc_macro_derive(HtmlForm)]
 pub fn derive(input: TokenStream) -> TokenStream {
     let ast = parse_macro_input!(input as DeriveInput);
-    let name = &ast.ident;
-    eprintln!("{:#?}", ast);
+    // eprintln!("{:#?}", ast);
+
+    let ident = &ast.ident;
     let struct_visibility = ast.vis;
-    let unchecked_name = format!("{}Unchecked", name);
-    let unchecked_ident = syn::Ident::new(&unchecked_name, name.span());
+    let unchecked_ident_string = format!("{}Unchecked", ident);
+    let unchecked_ident = syn::Ident::new(&unchecked_ident_string, ident.span());
+
+    let fields = if let syn::Data::Struct(syn::DataStruct {
+        fields: syn::Fields::Named(syn::FieldsNamed { ref named, .. }),
+        ..
+    }) = ast.data
+    {
+        named
+    } else {
+        unimplemented!();
+    };
+
+    let optionized_fields = fields.iter().map(|f| {
+        let ident = &f.ident;
+        let ty = &f.ty;
+        let vis = &f.vis;
+        quote! {
+            #vis #ident: std::option::Option<#ty>
+        }
+    });
 
     let expanded = quote! {
         #[derive(Debug)]
         #struct_visibility struct #unchecked_ident {
-            pub foo: Option<String>,
-            pub bar: Option<u8>,
+            #(#optionized_fields,)*
         }
 
     };

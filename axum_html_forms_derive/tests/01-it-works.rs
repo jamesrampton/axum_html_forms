@@ -1,20 +1,27 @@
+use inner::SimpleForm;
+
 mod inner {
     #[derive(Debug, HtmlForm)]
     pub struct SimpleForm {
-        name: String,
-        age: u8,
+        pub name: String,
+        pub age: u8,
     }
 
     use axum_html_forms_derive::HtmlForm;
 }
 
 fn main() {
-    let unchecked = inner::SimpleFormUnchecked {
-        foo: Some(String::from("Jane")),
-        bar: Some(42),
+    let original = SimpleForm {
+        name: String::from("John"),
+        age: 69,
     };
 
-    // let _ = original.name;
-    // let _ = original.age;
+    let unchecked = inner::SimpleFormUnchecked {
+        name: Some(String::from("Jane")),
+        age: Some(42),
+    };
+
+    let _ = original.name;
+    let _ = original.age;
     let _ = unchecked;
 }
