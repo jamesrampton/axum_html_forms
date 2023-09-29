@@ -17,9 +17,8 @@ pub fn derive(input: TokenStream) -> TokenStream {
         unimplemented!();
     };
 
-    let optionized_fields = fields.iter().map(|f| {
+    let all_option_strings = fields.iter().map(|f| {
         let ident = &f.ident;
-        let ty = &f.ty;
         let vis = &f.vis;
         quote! {
             #vis #ident: std::option::Option<std::string::String>
@@ -29,7 +28,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
     let expanded = quote! {
         #[derive(Debug)]
         #struct_vis struct #unchecked_ident {
-            #(#optionized_fields,)*
+            #(#all_option_strings,)*
         }
 
     };
