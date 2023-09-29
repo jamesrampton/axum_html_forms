@@ -58,8 +58,26 @@ pub fn derive(input: TokenStream) -> TokenStream {
         }
     });
 
+    let empty_fields = fields.iter().map(|f| {
+        let ident = &f.ident;
+        quote! {
+            || !self.fields.#ident.errors.is_empty()
+        }
+    });
+
+    let render_fields = fields.iter().map(|f| {
+        let ident = &f.ident;
+        quote! {
+            {
+                self.fields.#ident.render()
+            }
+        }
+    });
+
     // Final output
     let expanded = quote! {
+        use axum_html_forms::HtmlField;
+        use html_node::html;
         #[derive(Debug)]
         #struct_vis struct #unchecked_ident {
             #(#all_option_strings,)*
@@ -87,7 +105,22 @@ pub fn derive(input: TokenStream) -> TokenStream {
             }
         }
 
+        impl #html_form_ident {
+            pub fn new() -> Self {
+                Self::default()
+            }
 
+            pub fn has_errors(&self) -> bool {
+                !self.errors.is_empty()
+                #(#empty_fields)*
+            }
+
+            pub fn render(&self) -> html_node::Node {
+                html_node::html! {
+                    #(#render_fields)*
+                }
+            }
+        }
     };
     expanded.into()
 }

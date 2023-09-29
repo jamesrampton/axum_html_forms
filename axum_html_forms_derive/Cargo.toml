@@ -19,4 +19,5 @@ trybuild = { version = "1.0.49", features = ["diff"] }
 quote = "1.0.33"
 syn = { version = "2.0.37", features = ["derive", "extra-traits"] }
 axum_html_forms = { path = "../axum_html_forms"}
+html-node = { version = "0.2.1", features = ["typed"] }
 

@@ -23,6 +23,7 @@ name = "axum_html_forms_derive"
 version = "0.1.0"
 dependencies = [
  "axum_html_forms",
+ "html-node",
  "quote",
  "syn",
  "trybuild",
