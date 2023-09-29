@@ -8,6 +8,7 @@ version = "0.1.0"
 dependencies = [
  "axum_html_forms",
  "axum_html_forms_derive",
+ "html-node",
 ]
 
 [[package]]

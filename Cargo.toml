@@ -12,3 +12,4 @@ path = "main.rs"
 [dependencies]
 axum_html_forms = { path = "axum_html_forms"}
 axum_html_forms_derive = { path = "axum_html_forms_derive"}
+html-node = { version = "0.2.1", features = ["typed"] }

@@ -23,8 +23,6 @@ fn main() {
 
     let form = inner::SimpleFormHtmlForm::default();
 
-    // This somehow works even though cargo expand shows the `render` function
-    // body as `()`... I wasted 2 hours on this
     let nodes = form.render();
     let html = format!("{nodes:#}");
     eprintln!("{}", html);
