@@ -27,6 +27,8 @@ fn main() {
     let html = format!("{nodes:#}");
     eprintln!("{}", html);
 
+    let parsed_form = SimpleForm::try_from(&unchecked);
+
     let _ = original.name;
     let _ = original.age;
     let _ = unchecked;
