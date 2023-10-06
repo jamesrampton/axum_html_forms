@@ -111,6 +111,21 @@ pub fn derive(input: TokenStream) -> TokenStream {
                     form.fields.#ident.value = value.#ident.clone();
                     #ident = value.#ident.clone();
                 };
+            } else {
+                return quote! {
+                    if let Some(ref v) = value.#ident {
+                        form.fields.#ident.value = value.#ident.clone();
+                        match v.parse::<#inner_ty>() {
+                            Ok(v) => #ident = Some(v),
+                            Err(e) => {
+                                form.fields.#ident.errors.push(e.to_string());
+                            }
+                        }
+                    } else {
+                        form.fields.#ident.value = None;
+                        #ident = None;
+                    }
+                };
             }
         }
 
