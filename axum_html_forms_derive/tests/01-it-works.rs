@@ -25,13 +25,13 @@ fn main() {
     let unchecked_1 = inner::SimpleFormUnchecked {
         name: Some(String::from("Jane")),
         age: Some(String::from("42")),
-        favourite_word: None,
+        favourite_word: Some(String::from("Beans")),
         favourite_number: Some(String::from("1")),
     };
     let unchecked_2 = inner::SimpleFormUnchecked {
         name: Some(String::from("Alice")),
         age: Some(String::from("69")),
-        favourite_word: Some(String::from("Beans")),
+        favourite_word: None,
         favourite_number: Some(String::from("satre")),
     };
 

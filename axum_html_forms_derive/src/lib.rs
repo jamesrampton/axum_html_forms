@@ -108,8 +108,12 @@ pub fn derive(input: TokenStream) -> TokenStream {
         if let Some(inner_ty) = ty_inside_option(ty) {
             if ty_is_string(inner_ty) {
                 return quote! {
-                    form.fields.#ident.value = value.#ident.clone();
-                    #ident = value.#ident.clone();
+                    if let Some(ref v) = value.#ident {
+                        form.fields.#ident.value = value.#ident.clone();
+                        #ident = Some(v.clone());
+                    } else {
+                        form.fields.#ident.value = None;
+                    }
                 };
             } else {
                 return quote! {
