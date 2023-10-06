@@ -33,4 +33,5 @@ fn main() {
     let _ = original.age;
     let _ = unchecked;
     let _ = form;
+    let _ = parsed_form;
 }
