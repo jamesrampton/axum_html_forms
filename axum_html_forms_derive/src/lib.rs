@@ -18,7 +18,6 @@ fn ty_inner_type(ty: &syn::Type) -> &syn::Type {
 
 fn ty_is_string(ty: &syn::Type) -> bool {
     if let syn::Type::Path(ref p) = ty {
-        eprintln!("{}", p.path.segments[0].ident);
         if p.path.segments.len() == 1 && p.path.segments[0].ident == "String" {
             return true;
         }
